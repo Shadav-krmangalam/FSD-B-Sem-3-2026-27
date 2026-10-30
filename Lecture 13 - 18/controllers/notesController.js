@@ -6,13 +6,17 @@ const getNotes = (req,res)=>{
 } 
 
 const getNoteById = (req,res)=>{
-  let {id} = req.params
+  try{
+    let {id} = req.params
   let note =  notes.find(note => note.id === Number(id))
 
   if(!note){
     return res.status(404).send("Mila nahi bhai")
   }
   res.status(200).send(note)
+  }catch(err){
+    res.status(500).send(err)
+  }
 }
 
 const createNote = (req,res)=>{
